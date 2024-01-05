@@ -1,3 +1,3 @@
 - Go init: go mod init gihub.com/vstream
 - fiber docks: https://docs.gofiber.io/
-- Install fiber : go get "github.com/gofiber/fiber/v2"
+- Install GIN : $ go $ go get -u github.com/gin-gonic/gin

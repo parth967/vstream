@@ -8,6 +8,6 @@ import (
 
 func main() {
 	fmt.Println("Starting Server")
-	servers.Run()
+	servers.RunServer()
 	fmt.Println("Server Stop")
 }

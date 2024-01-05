@@ -1,9 +1,11 @@
 package servers
 
 import (
-	"errors"
 	"fmt"
-	"net/http"
+
+	"time"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 const PORT = ":8080"
@@ -22,26 +24,21 @@ func (s *serverInfo) printServerInfo() {
 }
 
 func (s *serverInfo) initServer() {
-	// TODO: Chaneg later to read proper log file and get info instead of constants
-	// TODO: Add required info later on
 	s.port = PORT
 }
 
-func Run() error {
-	var sData serverInfo
-	sData.initServer()
-	sData.printServerInfo()
+func RunServer() {
+	var s serverInfo
+	s.initServer()
+	s.printServerInfo()
 
-	if sData.port == "" {
-		return errors.New("Port is not mentioned")
-	}
+	app := fiber.New()
+	now := time.Now().Format("2006-01-02 15:04:05")
 
-	defaultPage := func(w http.ResponseWriter, _ *http.Request) {
-		w.Write([]byte("Default Page of vstream"))
-	}
-	http.HandleFunc("/", defaultPage)
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Default Page of vStream ..... " + now)
+	})
+	app.Get("/auth")
 
-	http.ListenAndServe(sData.port, nil)
-
-	return nil
+	app.Listen(s.port)
 }
