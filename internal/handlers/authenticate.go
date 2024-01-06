@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -8,6 +9,8 @@ import (
 	"github.com/vstream/internal/config"
 	"github.com/vstream/internal/models"
 )
+
+const AUTH_KEY = "APP_TOKEN"
 
 func Login(c *fiber.Ctx) error {
 	loginRequest := new(models.LoginRequest)
@@ -36,9 +39,19 @@ func Login(c *fiber.Ctx) error {
 			"error": err.Error(),
 		})
 	}
+
+	os.Setenv(AUTH_KEY, t)
 	return c.JSON(models.LoginResponse{
 		Token: t,
 	})
+}
+
+func IsValidUser() bool {
+	if os.Getenv(AUTH_KEY) != "" {
+		return true
+	} else {
+		return false
+	}
 }
 
 func Protected(c *fiber.Ctx) error {
