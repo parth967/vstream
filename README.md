@@ -1,4 +1,4 @@
-Document Control System
+* Document Control System *
 Welcome to the Document Control System! This web application allows users to upload various types of documents and manage different versions of those documents seamlessly.
 
 Initial Design
