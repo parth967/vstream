@@ -5,10 +5,13 @@ import (
 	"os"
 	"time"
 
+	"github.com/vstream/internal/handlers"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html/v2"
 	"github.com/joho/godotenv"
+	"github.com/vstream/internal/config"
 )
 
 type ServerData interface {
@@ -37,7 +40,10 @@ func setRouters(app *fiber.App) error {
 			"Description": "This is default Page of app",
 		})
 	})
-	app.Get("/auth", nil)
+
+	jwt := handlers.NewAuthMiddleware(config.Secret)
+	app.Post("/login", handlers.Login)
+	app.Get("/protected", jwt, handlers.Protected)
 
 	return nil
 }
