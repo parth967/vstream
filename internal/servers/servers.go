@@ -5,13 +5,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/vstream/internal/config"
-	"github.com/vstream/internal/handlers"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html/v2"
 	"github.com/joho/godotenv"
+	"github.com/vstream/internal/handlers"
 )
 
 type ServerData interface {
@@ -35,16 +33,10 @@ func (s *serverInfo) initServer() {
 
 func setRouters(app *fiber.App) error {
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("layouts/index", fiber.Map{
-			"Title":       "vstream-app",
-			"Description": "This is default Page of app",
-		})
+		return c.Render("layouts/index", fiber.Map{})
 	})
-
-	jwt := handlers.NewAuthMiddleware(config.Secret)
-	app.Post("/login", handlers.Login)
-	app.Get("/protected", jwt, handlers.Protected)
-
+	app.Post("/login", handlers.HandleLogin)
+	app.Post("/signup", handlers.HandleSignup)
 	return nil
 }
 
@@ -53,9 +45,12 @@ func RunServer() {
 	server.initServer()
 
 	engine := html.New("./views", ".html")
+
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
+
+	app.Static("/assets", "./assets")
 	app.Use(logger.New()) //TODO: Modify logger later on and on off based on .env file
 
 	setRouters(app)

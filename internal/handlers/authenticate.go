@@ -1,63 +1,79 @@
 package handlers
 
 import (
+	"errors"
 	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	jtoken "github.com/golang-jwt/jwt/v4"
-	"github.com/vstream/internal/config"
+	"github.com/joho/godotenv"
+	"github.com/vstream/internal/db"
 	"github.com/vstream/internal/models"
 )
 
-const AUTH_KEY = "APP_TOKEN"
+func HandleLogin(ctx *fiber.Ctx) error {
+	username := ctx.FormValue("username")
+	password := ctx.FormValue("password")
 
-func Login(c *fiber.Ctx) error {
-	loginRequest := new(models.LoginRequest)
-	if err := c.BodyParser(loginRequest); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": err.Error(),
-		})
-	}
-	user, err := models.FindByCredentials(loginRequest.Email, loginRequest.Password)
+	token, err := findUserByCredentials(username, password, ctx)
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"error": err.Error(),
-		})
-	}
-	day := time.Hour * 24
-	claims := jtoken.MapClaims{
-		"ID":    user.ID,
-		"email": user.Email,
-		"fav":   user.FavoritePhrase,
-		"exp":   time.Now().Add(day * 1).Unix(),
-	}
-	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, claims)
-	t, err := token.SignedString([]byte(config.Secret))
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": err.Error(),
-		})
+		ctx.SendString("wrong username or password")
 	}
 
-	os.Setenv(AUTH_KEY, t)
-	return c.JSON(models.LoginResponse{
-		Token: t,
+	return ctx.SendString(token)
+}
+
+func findUserByCredentials(username, password string, ctx *fiber.Ctx) (string, error) {
+	var user models.User
+
+	isValid, err := db.ValidateUser("username", username, password, &user, ctx)
+	if err != nil {
+		return "", err
+	}
+
+	if isValid {
+		token, err := generateToken(username)
+		if err != nil {
+			return "", err
+		}
+
+		return token, nil
+	}
+
+	return "", errors.New("wrong username or password ")
+}
+
+func generateToken(username string) (string, error) {
+	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, jtoken.MapClaims{
+		"username": username,
+		"exp":      time.Now().Add(time.Hour * 24).Unix(),
 	})
-}
 
-func IsValidUser() bool {
-	if os.Getenv(AUTH_KEY) != "" {
-		return true
-	} else {
-		return false
+	godotenv.Load()
+	secretKey := os.Getenv("TOKEN_SECRET")
+
+	tokenString, err := token.SignedString([]byte(secretKey))
+	if err != nil {
+		return "", err
 	}
+
+	return tokenString, nil
 }
 
-func Protected(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jtoken.Token)
-	claims := user.Claims.(jtoken.MapClaims)
-	email := claims["email"].(string)
-	favPhrase := claims["fav"].(string)
-	return c.SendString("Welcome 👋" + email + " " + favPhrase)
+func HandleSignup(ctx *fiber.Ctx) error {
+	newUsername := ctx.FormValue("new-username")
+	newPassword := ctx.FormValue("new-password")
+	defaultPermission := "admin"
+
+	err := registerUser(newUsername, newPassword, defaultPermission, ctx)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func registerUser(username, password, permission string, ctx *fiber.Ctx) error {
+	db.AddUser(username, password, permission, ctx)
+	return nil
 }

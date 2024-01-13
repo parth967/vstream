@@ -1,11 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/assets/stylesheet/home.css">
+    <title>VSTREAM</title>
 </head>
+
 <body>
-    <h6>{{.Description}}</h6>
+    <header>
+        <div class="title-container">
+            <h1>VSTREAM</h1>
+            <p class="document-control">Document version control</p>
+        </div>
+        <button id="toggle-mode" onclick="toggleMode()">Light Mode</button>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <div id="login-form" class="active-form">
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div id="signup-form">
+                <h2>Signup</h2>
+                <form action="/signup" method="post">
+                    <label for="new-username">New Username:</label>
+                    <input type="text" id="new-username" name="new-username" required>
+
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" name="new-password" required>
+
+                    <button type="submit">Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 VSTREAM. All rights reserved. Document Control System with VSTREAM</p>
+    </footer>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+            var toggleButton = document.getElementById('toggle-mode');
+            var isDarkMode = document.body.classList.contains('dark-mode');
+            toggleButton.innerText = isDarkMode ? 'Dark Mode' : 'Light Mode';
+        }
+    </script>
 </body>
+
 </html>
