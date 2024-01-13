@@ -10,6 +10,7 @@ import (
 	"github.com/gofiber/template/html/v2"
 	"github.com/joho/godotenv"
 	"github.com/vstream/internal/handlers"
+	"github.com/vstream/internal/pages"
 )
 
 type ServerData interface {
@@ -37,6 +38,12 @@ func setRouters(app *fiber.App) error {
 	})
 	app.Post("/login", handlers.HandleLogin)
 	app.Post("/signup", handlers.HandleSignup)
+
+	app.Get("/d", DestroyServer) ///remove this line and function later
+
+	app.Use(handlers.AuthMiddleware)
+	app.Get("/home", pages.RenderHome)
+
 	return nil
 }
 
@@ -51,9 +58,15 @@ func RunServer() {
 	})
 
 	app.Static("/assets", "./assets")
-	app.Use(logger.New()) //TODO: Modify logger later on and on off based on .env file
+
+	app.Use(logger.New()) //TODO: Implements log later on..
 
 	setRouters(app)
 
 	app.Listen(server.port)
+}
+
+func DestroyServer(ctx *fiber.Ctx) error {
+	log.Fatal("Server Destroy")
+	return nil
 }

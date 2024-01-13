@@ -92,13 +92,13 @@ func AddUser(username, password, permisson string, ctx *fiber.Ctx) error {
 	}
 
 	var maxID int
-	if err := dbConn.Model(&models.User{}).Select("COALESCE(MAX(id), 0) + 1").Scan(&maxID).Error; err != nil {
+	if err := dbConn.Model(&models.User{}).Select("COALESCE(MAX(user_id), 0) + 1").Scan(&maxID).Error; err != nil {
 		return errors.New("something is wrong")
 	}
 
 	now := time.Now()
 	newUser := models.User{
-		ID:        uint8(maxID),
+		UserID:    uint8(maxID),
 		Username:  username,
 		Password:  string(hashedPassword),
 		Access:    permisson,

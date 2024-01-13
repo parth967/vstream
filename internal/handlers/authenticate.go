@@ -18,10 +18,16 @@ func HandleLogin(ctx *fiber.Ctx) error {
 
 	token, err := findUserByCredentials(username, password, ctx)
 	if err != nil {
-		ctx.SendString("wrong username or password")
-	}
+		ctx.Redirect("/")
+	} else {
+		ctx.Cookie(&fiber.Cookie{
+			Name:  "Auth",
+			Value: token,
+		})
 
-	return ctx.SendString(token)
+		ctx.Redirect("/home")
+	}
+	return nil
 }
 
 func findUserByCredentials(username, password string, ctx *fiber.Ctx) (string, error) {
@@ -33,7 +39,7 @@ func findUserByCredentials(username, password string, ctx *fiber.Ctx) (string, e
 	}
 
 	if isValid {
-		token, err := generateToken(username)
+		token, err := generateToken(username, user.UserID)
 		if err != nil {
 			return "", err
 		}
@@ -44,9 +50,10 @@ func findUserByCredentials(username, password string, ctx *fiber.Ctx) (string, e
 	return "", errors.New("wrong username or password ")
 }
 
-func generateToken(username string) (string, error) {
+func generateToken(username string, userid uint8) (string, error) {
 	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, jtoken.MapClaims{
 		"username": username,
+		"userid":   userid,
 		"exp":      time.Now().Add(time.Hour * 24).Unix(),
 	})
 
@@ -75,5 +82,6 @@ func HandleSignup(ctx *fiber.Ctx) error {
 
 func registerUser(username, password, permission string, ctx *fiber.Ctx) error {
 	db.AddUser(username, password, permission, ctx)
+	ctx.Redirect("/")
 	return nil
 }
