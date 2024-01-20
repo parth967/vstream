@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111; /* Dark background color */
+    color: #fff; /* Light text color */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    background-color: #333; /* Dark Gray */
+    color: #fff; /* White */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-container {
+    text-align: left;
+}
+
+h1 {
+    font-size: 2em; /* Medium font size */
+    margin: 0;
+}
+
+.document-control {
+    font-size: 0.8em; /* Smaller font size */
+    margin: 5px 0 0 0;
+}
+
+.mode-switch {
+    cursor: pointer;
+}
+
+.light-mode {
+    display: inline-block;
+}
+
+.dark-mode {
+    display: none;
+}
+
+.dark-mode.active {
+    display: inline-block;
+}
+
+.light-mode.active {
+    display: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* Adjust as needed */
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%; /* Adjust as needed */
+    max-width: 800px; /* Maximum width for responsiveness */
+}
+
+.form-card {
+    background-color: #1f1f1f; /* Dark Gray */
+    color: #fff; /* White */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 45%; /* Adjust as needed */
+    box-sizing: border-box;
+    margin: 0 10px; /* Add margin to create space between forms */
+}
+
+h2 {
+    font-size: 1.5em; /* Large font size */
+}
+
+form {
+    width: 100%; /* Adjust as needed */
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Slightly darker Green */
+}
+
+.footer {
+    background-color: #333; /* Dark Gray */
+    color: #fff; /* White */
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

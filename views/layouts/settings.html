@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
+    <title>Settings Page</title>
+</head>
+<body class="container mt-5">
+    <h2 class="mb-4">Settings</h2>
+
+    <!-- Folder Path Setting -->
+    <div class="mb-4">
+        <label for="folderPath">Folder Path:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="folderPath" placeholder="Enter folder path">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" hx-get="/updateFolderPath">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metadata Setting -->
+    <div class="mb-4">
+        <label for="metadata">Metadata Setting:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="metadata" placeholder="Enter metadata">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" hx-get="/updateMetadata">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTMX Triggered Content Update -->
+    <div hx-get="/updateFolderPath" hx-target="#folderPath" hx-swap="outerHTML"></div>
+    <div hx-get="/updateMetadata" hx-target="#metadata" hx-swap="outerHTML"></div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

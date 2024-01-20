@@ -46,3 +46,7 @@ Now you're ready to use the *Document Control System* locally on your machine.
 If you have suggestions or want to contribute to the improvement of the *Document Control System*, feel free to submit a pull request.
 
 Happy Document Managing!
+
+# RUN TESTS
+
+go tests ./tests/...

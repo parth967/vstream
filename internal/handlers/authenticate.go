@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"time"
 
@@ -37,6 +38,11 @@ func findUserByCredentials(username, password string, ctx *fiber.Ctx) (string, e
 	if err != nil {
 		return "", err
 	}
+
+	fmt.Println(user.UserID)
+	fmt.Println(user.Username)
+	fmt.Println(user.Password)
+	fmt.Println(user.Access)
 
 	if isValid {
 		token, err := generateToken(username, user.UserID)
@@ -81,7 +87,15 @@ func HandleSignup(ctx *fiber.Ctx) error {
 }
 
 func registerUser(username, password, permission string, ctx *fiber.Ctx) error {
-	db.AddUser(username, password, permission, ctx)
-	ctx.Redirect("/")
-	return nil
+	err := db.AddUser(username, password, permission, ctx)
+
+	if err != nil {
+		errString := err.Error()
+		redirectURL := fmt.Sprintf("/?error=%s", errString)
+		return ctx.Redirect(redirectURL)
+	}
+
+	redirectURL := fmt.Sprintf("/?success=%s", "Signup successful")
+	return ctx.Redirect(redirectURL)
+
 }

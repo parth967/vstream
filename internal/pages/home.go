@@ -11,7 +11,8 @@ func RenderHome(ctx *fiber.Ctx) error {
 		ctx.Redirect("/")
 	} else {
 		data := fiber.Map{
-			"Name": Name,
+			"Title": "VSTREAM - Home",
+			"Name":  Name,
 		}
 
 		return ctx.Render("layouts/home", data)

@@ -85,28 +85,33 @@ func AddUser(username, password, permisson string, ctx *fiber.Ctx) error {
 	if err != nil {
 		return errors.New("connection failed")
 	}
+	var user models.User
+	result := dbConn.Where("Username= ?", username).First(&user)
+	if result.Error == gorm.ErrRecordNotFound {
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+		if err != nil {
+			return errors.New("password can not hashed")
+		}
 
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return errors.New("password can not hashed")
+		var maxID int
+		if err := dbConn.Model(&models.User{}).Select("COALESCE(MAX(user_id), 0) + 1").Scan(&maxID).Error; err != nil {
+			return errors.New("something is wrong")
+		}
+
+		now := time.Now()
+		newUser := models.User{
+			UserID:    uint8(maxID),
+			Username:  username,
+			Password:  string(hashedPassword),
+			Access:    permisson,
+			CreatedAt: now,
+		}
+
+		if err := dbConn.Create(&newUser).Error; err != nil {
+			return errors.New("internal server error")
+		}
+		return nil
 	}
 
-	var maxID int
-	if err := dbConn.Model(&models.User{}).Select("COALESCE(MAX(user_id), 0) + 1").Scan(&maxID).Error; err != nil {
-		return errors.New("something is wrong")
-	}
-
-	now := time.Now()
-	newUser := models.User{
-		UserID:    uint8(maxID),
-		Username:  username,
-		Password:  string(hashedPassword),
-		Access:    permisson,
-		CreatedAt: now,
-	}
-
-	if err := dbConn.Create(&newUser).Error; err != nil {
-		return errors.New("internal server error")
-	}
-	return nil
+	return errors.New("record already exists ")
 }
