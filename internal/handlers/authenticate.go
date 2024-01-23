@@ -39,27 +39,22 @@ func findUserByCredentials(username, password string, ctx *fiber.Ctx) (string, e
 		return "", err
 	}
 
-	fmt.Println(user.UserID)
-	fmt.Println(user.Username)
-	fmt.Println(user.Password)
-	fmt.Println(user.Access)
-
 	if isValid {
-		token, err := generateToken(username, user.UserID)
+		token, err := generateToken(user.Name, user.Username, user.UserID)
 		if err != nil {
 			return "", err
 		}
-
 		return token, nil
 	}
 
 	return "", errors.New("wrong username or password ")
 }
 
-func generateToken(username string, userid uint8) (string, error) {
+func generateToken(name, username string, userid uint8) (string, error) {
 	token := jtoken.NewWithClaims(jtoken.SigningMethodHS256, jtoken.MapClaims{
 		"username": username,
 		"userid":   userid,
+		"name":     name,
 		"exp":      time.Now().Add(time.Hour * 24).Unix(),
 	})
 
@@ -77,17 +72,18 @@ func generateToken(username string, userid uint8) (string, error) {
 func HandleSignup(ctx *fiber.Ctx) error {
 	newUsername := ctx.FormValue("new-username")
 	newPassword := ctx.FormValue("new-password")
+	newName := ctx.FormValue("new-name")
 	defaultPermission := "admin"
 
-	err := registerUser(newUsername, newPassword, defaultPermission, ctx)
+	err := registerUser(newName, newUsername, newPassword, defaultPermission, ctx)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func registerUser(username, password, permission string, ctx *fiber.Ctx) error {
-	err := db.AddUser(username, password, permission, ctx)
+func registerUser(name, username, password, permission string, ctx *fiber.Ctx) error {
+	err := db.AddUser(name, username, password, permission, ctx)
 
 	if err != nil {
 		errString := err.Error()

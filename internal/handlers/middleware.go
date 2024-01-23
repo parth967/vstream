@@ -27,7 +27,9 @@ func AuthMiddleware(ctx *fiber.Ctx) error {
 	}
 
 	username := getTokenInfo(token, "username")
+	name := getTokenInfo(token, "name")
 	ctx.Locals("username", username)
+	ctx.Locals("name", name)
 	return ctx.Next()
 }
 
@@ -38,11 +40,16 @@ func getTokenInfo(token *jtoken.Token, KeyName string) string {
 		return ""
 	}
 
-	username, ok := claims["username"].(string)
+	val, ok := claims[KeyName].(string)
 
 	if !ok {
 		return ""
 	}
 
-	return username
+	return val
+}
+
+func ClearUser(ctx *fiber.Ctx) error {
+	ctx.ClearCookie("Auth")
+	return nil
 }

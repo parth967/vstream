@@ -9,15 +9,7 @@ import (
 )
 
 func SetRouters(app *fiber.App) error {
-	app.Get("/", func(c *fiber.Ctx) error {
-		successMessage := c.Query("success")
-		errorMessage := c.Query("error")
-
-		return c.Render("layouts/index", fiber.Map{
-			"SuccessMessage": successMessage,
-			"ErrorMessage":   errorMessage,
-		})
-	}).Name("Index")
+	app.Get("/", pages.LoadHomePage).Name("Index")
 
 	app.Post("/login", handlers.HandleLogin).Name("Login")
 	app.Post("/signup", handlers.HandleSignup).Name("Signup")
@@ -26,7 +18,9 @@ func SetRouters(app *fiber.App) error {
 
 	app.Use(handlers.AuthMiddleware)
 	app.Get("/home", pages.RenderHome).Name("Home")
-	app.Get("/settings", pages.RenderSettings).Name("Settings")
+	app.Get("/settings", pages.RenderSettingsPage).Name("Settings")
+	app.Get("/getName", handlers.PrintName).Name("Name")
+	app.Get("/logout", pages.HandleLogout).Name("Logout")
 
 	return nil
 }

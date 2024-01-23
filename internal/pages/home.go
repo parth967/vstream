@@ -14,7 +14,6 @@ func RenderHome(ctx *fiber.Ctx) error {
 			"Title": "VSTREAM - Home",
 			"Name":  Name,
 		}
-
 		return ctx.Render("layouts/home", data)
 	}
 	return nil

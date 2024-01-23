@@ -43,7 +43,7 @@ func RunServer() {
 
 	app.Static("/assets", "./assets")
 
-	app.Use(logger.New()) //TODO: Implements log later on..
+	app.Use(logger.New()) //TODO: Set logger later
 
 	routers.SetRouters(app)
 

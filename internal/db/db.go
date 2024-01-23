@@ -79,7 +79,7 @@ func ValidateUser(colName string, colValue string, expectedVal string, user *mod
 	return isValid, nil
 }
 
-func AddUser(username, password, permisson string, ctx *fiber.Ctx) error {
+func AddUser(name, username, password, permisson string, ctx *fiber.Ctx) error {
 
 	dbConn, err := DBConnect(true)
 	if err != nil {
@@ -102,6 +102,7 @@ func AddUser(username, password, permisson string, ctx *fiber.Ctx) error {
 		newUser := models.User{
 			UserID:    uint8(maxID),
 			Username:  username,
+			Name:      name,
 			Password:  string(hashedPassword),
 			Access:    permisson,
 			CreatedAt: now,
