@@ -6,7 +6,7 @@ import (
 )
 
 func LoadHomePage(ctx *fiber.Ctx) error {
-	if ctx.Cookies("Auth") != "" {
+	if ctx.Cookies("Auth", "") != "" {
 		handlers.AuthMiddleware(ctx)
 		name := handlers.GetName(ctx)
 		if name != "" {

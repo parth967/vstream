@@ -5,7 +5,11 @@ import (
 )
 
 func GetName(ctx *fiber.Ctx) string {
-	return ctx.Locals("name").(string)
+	data := ctx.Locals("name")
+	if data != nil {
+		return data.(string)
+	}
+	return ""
 }
 
 func PrintName(ctx *fiber.Ctx) error {
