@@ -1,0 +1,620 @@
+{
+  "contentType": "application/gliffy+json",
+  "version": "1.0",
+  "editorVersion": "12.4.3",
+  "title": "Data Retention Pipeline",
+  "resources": {},
+  "stage": {
+    "background": "#FFFFFF",
+    "dimensions": {
+      "width": 1000,
+      "height": 1200
+    },
+    "grid": {
+      "visible": true,
+      "snapTo": true
+    },
+    "objects": [
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 1,
+        "graphic": {
+          "x": 100,
+          "y": 20,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Start",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 2,
+        "graphic": {
+          "x": 100,
+          "y": 80,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Trigger Quarterly",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 3,
+        "graphic": {
+          "x": 100,
+          "y": 140,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Query Config Table",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 4,
+        "graphic": {
+          "x": 100,
+          "y": 200,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Add Tasks to Queue",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 5,
+        "graphic": {
+          "x": 100,
+          "y": 260,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Check for ingestion tasks?",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 6,
+        "graphic": {
+          "x": 250,
+          "y": 320,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Ingestion running? Delay",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 7,
+        "graphic": {
+          "x": 100,
+          "y": 320,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Schedule Tasks",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 8,
+        "graphic": {
+          "x": 100,
+          "y": 380,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Is CDF Enabled?",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 9,
+        "graphic": {
+          "x": 250,
+          "y": 440,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Log Failed, Skip",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 10,
+        "graphic": {
+          "x": 100,
+          "y": 440,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Log Delta Version",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 11,
+        "graphic": {
+          "x": 100,
+          "y": 500,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Count & Delete Records",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 12,
+        "graphic": {
+          "x": 100,
+          "y": 560,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Validation Approach 1\nMatch CDF Count?",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 13,
+        "graphic": {
+          "x": 250,
+          "y": 620,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Rollback",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 14,
+        "graphic": {
+          "x": 100,
+          "y": 620,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Log & Proceed",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 15,
+        "graphic": {
+          "x": 100,
+          "y": 680,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Validation Approach 2\nCheck Max Dates",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 16,
+        "graphic": {
+          "x": 100,
+          "y": 740,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Final Count OK?",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 17,
+        "graphic": {
+          "x": 100,
+          "y": 800,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Logging & Monitoring",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 18,
+        "graphic": {
+          "x": 100,
+          "y": 860,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Send Metrics to Datadog",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 19,
+        "graphic": {
+          "x": 100,
+          "y": 920,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "Future Enhancements\nCheck Min Effective Date",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      },
+      {
+        "class": "com.gliffy.shape.basic.basic_v1",
+        "id": 20,
+        "graphic": {
+          "x": 100,
+          "y": 1000,
+          "width": 160,
+          "height": 40,
+          "rotation": 0,
+          "opacity": 1,
+          "fill": "#FFFFFF",
+          "stroke": "#000000",
+          "strokeWidth": 1,
+          "dashStyle": "solid"
+        },
+        "shape": {
+          "tid": "rectangle"
+        },
+        "text": {
+          "value": "End",
+          "verticalAlign": "middle",
+          "horizontalAlign": "center",
+          "color": "#000000",
+          "fontSize": 12,
+          "fontFamily": "Arial",
+          "bold": false,
+          "italic": false,
+          "underline": false
+        }
+      }
+    ]
+  }
+}
